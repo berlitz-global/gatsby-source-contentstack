@@ -122,6 +122,7 @@ const getPagedData = async ({
   query.locale = locale;
   if (url.includes("locales")) query.v = Math.floor(Math.random() * 100);
   let response = await fetchCsData(url, config, query);
+  let aggregatedResponse = response[responseKey];
 
   if (!aggregatedResponse) {
     aggregatedResponse = response[responseKey];

@@ -80,16 +80,16 @@ exports.normalizeEntry = function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             return _context2.abrupt("return", new _promise2.default(function () {
-              var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(resolve) {
+              var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(resolve, reject) {
                 return _regenerator2.default.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
                         resolve((0, _assign2.default)({}, entry, builtEntry(contentType.schema, entry, entry.publish_details.locale, entries, createNodeId)));
-
+                        reject();
                         return _context.abrupt("return", null);
 
-                      case 2:
+                      case 3:
                       case "end":
                         return _context.stop();
                     }
@@ -97,7 +97,7 @@ exports.normalizeEntry = function () {
                 }, _callee, undefined);
               }));
 
-              return function (_x5) {
+              return function (_x5, _x6) {
                 return _ref2.apply(this, arguments);
               };
             }()));

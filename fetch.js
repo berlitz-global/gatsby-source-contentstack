@@ -308,7 +308,7 @@ var getPagedData = function () {
         responseKey = _ref10.responseKey,
         _ref10$skip = _ref10.skip,
         skip = _ref10$skip === undefined ? 0 : _ref10$skip;
-    var response;
+    var response, aggregatedResponse;
     return _regenerator2.default.wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
@@ -322,6 +322,7 @@ var getPagedData = function () {
 
           case 6:
             response = _context9.sent;
+            aggregatedResponse = response[responseKey];
 
 
             if (!aggregatedResponse) {
@@ -331,7 +332,7 @@ var getPagedData = function () {
             }
 
             if (!(skip + limit <= response.count)) {
-              _context9.next = 10;
+              _context9.next = 11;
               break;
             }
 
@@ -346,10 +347,10 @@ var getPagedData = function () {
               locale: locale
             }));
 
-          case 10:
+          case 11:
             return _context9.abrupt("return", aggregatedResponse);
 
-          case 11:
+          case 12:
           case "end":
             return _context9.stop();
         }
