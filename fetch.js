@@ -149,7 +149,9 @@ var fetchEntries = function () {
                 responseKey = "entries";
                 _context6.next = 4;
                 return reduce(locales, function () {
-                  var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(accumulator, locale) {
+                  var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
+                    var accumulator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+                    var locale = arguments[1];
                     var localeEntries;
                     return _regenerator2.default.wrap(function _callee5$(_context5) {
                       while (1) {
@@ -178,7 +180,7 @@ var fetchEntries = function () {
                     }, _callee5, _this);
                   }));
 
-                  return function (_x10, _x11) {
+                  return function () {
                     return _ref7.apply(this, arguments);
                   };
                 }(), []);
@@ -289,7 +291,7 @@ var fetchCsData = function () {
     }, _callee8, undefined);
   }));
 
-  return function fetchCsData(_x12, _x13, _x14) {
+  return function fetchCsData(_x11, _x12, _x13) {
     return _ref8.apply(this, arguments);
   };
 }();
@@ -306,7 +308,7 @@ var getPagedData = function () {
         responseKey = _ref10.responseKey,
         _ref10$skip = _ref10.skip,
         skip = _ref10$skip === undefined ? 0 : _ref10$skip;
-    var response;
+    var response, aggregatedResponse;
     return _regenerator2.default.wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
@@ -320,6 +322,7 @@ var getPagedData = function () {
 
           case 6:
             response = _context9.sent;
+            aggregatedResponse = response[responseKey];
 
 
             if (!aggregatedResponse) {
@@ -329,7 +332,7 @@ var getPagedData = function () {
             }
 
             if (!(skip + limit <= response.count)) {
-              _context9.next = 10;
+              _context9.next = 11;
               break;
             }
 
@@ -344,10 +347,10 @@ var getPagedData = function () {
               locale: locale
             }));
 
-          case 10:
+          case 11:
             return _context9.abrupt("return", aggregatedResponse);
 
-          case 11:
+          case 12:
           case "end":
             return _context9.stop();
         }
@@ -355,7 +358,7 @@ var getPagedData = function () {
     }, _callee9, undefined);
   }));
 
-  return function getPagedData(_x15) {
+  return function getPagedData(_x14) {
     return _ref9.apply(this, arguments);
   };
 }();

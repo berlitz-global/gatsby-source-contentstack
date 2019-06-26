@@ -45,7 +45,7 @@ exports.processEntry = (content_type, entry, createNodeId) => {
 };
 
 exports.normalizeEntry = async (contentType, entry, entries, createNodeId) => {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve, reject) => {
     resolve(
       Object.assign(
         {},
@@ -59,7 +59,7 @@ exports.normalizeEntry = async (contentType, entry, entries, createNodeId) => {
         )
       )
     );
-
+    reject();
     return null;
   });
 };
