@@ -23,11 +23,8 @@ module.exports = async configOptions => {
     entries: entries
   };
 
-  return {
-    contentstackData
-  };
-
   console.timeEnd(`Fetch Contentstack data`);
+  return { contentstackData };
 };
 
 const fetchLocales = async config => {
@@ -64,7 +61,7 @@ const fetchEntries = async (locales, contentTypes, configOptions) => {
     let responseKey = `entries`;
     let entries = await reduce(
       locales,
-      async (accumulator = [], locale) => {
+      async (accumulator, locale) => {
         let localeEntries = await getPagedData({
           config: configOptions,
           locale: locale.code,
@@ -95,6 +92,7 @@ const fetchCsData = async (url, config, query) => {
   let queryParams = queryString.stringify(query);
   let apiUrl = `${config.cdn}/${url}?${queryParams}`;
 
+  await new Promise(resolve => setTimeout(() => resolve(), 20));
   return new Promise((resolve, reject) => {
     fetch(apiUrl)
       .then(response => response.json())
@@ -115,14 +113,14 @@ const getPagedData = async ({
   locale,
   query = {},
   responseKey,
-  skip = 0
+  skip = 0,
+  aggregatedResponse
 }) => {
   query.skip = skip;
   query.limit = limit;
   query.locale = locale;
   if (url.includes("locales")) query.v = Math.floor(Math.random() * 100);
   let response = await fetchCsData(url, config, query);
-  let aggregatedResponse = response[responseKey];
 
   if (!aggregatedResponse) {
     aggregatedResponse = response[responseKey];
