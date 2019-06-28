@@ -59,9 +59,10 @@ module.exports = function () {
               contentTypes: contentTypes,
               entries: entries
             };
-            return _context.abrupt("return", {
-              contentstackData: contentstackData
-            });
+
+
+            console.timeEnd("Fetch Contentstack data");
+            return _context.abrupt("return", { contentstackData: contentstackData });
 
           case 18:
           case "end":
@@ -149,9 +150,7 @@ var fetchEntries = function () {
                 responseKey = "entries";
                 _context6.next = 4;
                 return reduce(locales, function () {
-                  var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5() {
-                    var accumulator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-                    var locale = arguments[1];
+                  var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(accumulator, locale) {
                     var localeEntries;
                     return _regenerator2.default.wrap(function _callee5$(_context5) {
                       while (1) {
@@ -180,7 +179,7 @@ var fetchEntries = function () {
                     }, _callee5, _this);
                   }));
 
-                  return function () {
+                  return function (_x10, _x11) {
                     return _ref7.apply(this, arguments);
                   };
                 }(), []);
@@ -272,6 +271,14 @@ var fetchCsData = function () {
 
             queryParams = queryString.stringify(query);
             apiUrl = config.cdn + "/" + url + "?" + queryParams;
+            _context8.next = 10;
+            return new _promise2.default(function (resolve) {
+              return setTimeout(function () {
+                return resolve();
+              }, 20);
+            });
+
+          case 10:
             return _context8.abrupt("return", new _promise2.default(function (resolve, reject) {
               fetch(apiUrl).then(function (response) {
                 return response.json();
@@ -283,7 +290,7 @@ var fetchCsData = function () {
               });
             }));
 
-          case 9:
+          case 11:
           case "end":
             return _context8.stop();
         }
@@ -291,7 +298,7 @@ var fetchCsData = function () {
     }, _callee8, undefined);
   }));
 
-  return function fetchCsData(_x11, _x12, _x13) {
+  return function fetchCsData(_x12, _x13, _x14) {
     return _ref8.apply(this, arguments);
   };
 }();
@@ -307,8 +314,9 @@ var getPagedData = function () {
         query = _ref10$query === undefined ? {} : _ref10$query,
         responseKey = _ref10.responseKey,
         _ref10$skip = _ref10.skip,
-        skip = _ref10$skip === undefined ? 0 : _ref10$skip;
-    var response, aggregatedResponse;
+        skip = _ref10$skip === undefined ? 0 : _ref10$skip,
+        aggregatedResponse = _ref10.aggregatedResponse;
+    var response;
     return _regenerator2.default.wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
@@ -322,7 +330,6 @@ var getPagedData = function () {
 
           case 6:
             response = _context9.sent;
-            aggregatedResponse = response[responseKey];
 
 
             if (!aggregatedResponse) {
@@ -332,7 +339,7 @@ var getPagedData = function () {
             }
 
             if (!(skip + limit <= response.count)) {
-              _context9.next = 11;
+              _context9.next = 10;
               break;
             }
 
@@ -347,10 +354,10 @@ var getPagedData = function () {
               locale: locale
             }));
 
-          case 11:
+          case 10:
             return _context9.abrupt("return", aggregatedResponse);
 
-          case 12:
+          case 11:
           case "end":
             return _context9.stop();
         }
@@ -358,7 +365,7 @@ var getPagedData = function () {
     }, _callee9, undefined);
   }));
 
-  return function getPagedData(_x14) {
+  return function getPagedData(_x15) {
     return _ref9.apply(this, arguments);
   };
 }();
